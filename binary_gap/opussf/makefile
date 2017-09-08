@@ -1,8 +1,6 @@
 CC = gcc
 CFLAGS = -pedantic -Wall
 
-
-
 all: bg
 
 bg: bg.o

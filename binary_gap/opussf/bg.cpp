@@ -43,8 +43,7 @@ int solution( int N ) {
 	bool oneSeen = false;
 
 	while( N > 0 ) {
-		bool bit = N % 2;
-		if( bit ) {
+		if( N % 2 ) {
 			zeroCountMax = (zeroCount > zeroCountMax) ? zeroCount : zeroCountMax;
 			zeroCount = 0;
 			oneSeen = true;

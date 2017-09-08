@@ -11,8 +11,7 @@ function solution( n )
 	zeroCountMax = 0
 	oneSeen = false
 	while n > 0 do
-		bit = n % 2
-		if( bit == 1 ) then
+		if( n % 2 == 1 ) then
 			zeroCountMax = math.max( zeroCountMax, zeroCount )
 			zeroCount = 0
 			oneSeen = true
