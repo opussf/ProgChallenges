@@ -1,7 +1,19 @@
 #!/usr/bin/env python
 
-def solution( arrayIn, split ):
+def s1( arrayIn, split ):
 	return abs( sum(arrayIn[:split]) - sum(arrayIn[split:]) )
+
+def solution( arrayIn, split ):
+	firstHalf = arrayIn[ : split ]
+	secondHalf = arrayIn[ split : ]
+
+	firstHalfSum = sum( firstHalf )
+	secondHalfSum = sum( secondHalf )
+
+	diff = firstHalfSum - secondHalfSum
+
+	absDiff = abs( diff )
+	return absDiff
 
 if __name__=="__main__":
 	import unittest
