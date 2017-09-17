@@ -17,3 +17,17 @@ Assume that:
 
 Bonus:
 * Write as a function
+* Write to handle C being any length
+
+`solution( "***", 3 )` should yield:
+
+	    ***
+	  *** ***
+	*** *** ***
+
+`solution( "****", 3 )` should yield:
+
+	      ****
+	   ****  ****
+	****  ****  ****
+
