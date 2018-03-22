@@ -35,11 +35,13 @@ def solution_2( listIn ):
 	Notes:
 	time to write (Bah! too long, looked it up)
 	https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
+	https://en.wikipedia.org/wiki/Kadane%27s_Algorithm
+
 	code simplicity :  too complex to understand at a single read
 	code comfort    :  low - med
-	code correctness:  fails for a list with no 0 values
-	gotcha: 0?  really?  0?
-	bonus : speed, is it worth the not-correct convoluted logic?
+	code correctness:  seems correct, with more complexity
+
+	bonus : speed   O: n
 	"""
 	max_so_far = listIn[0]
 	curr_max = listIn[0]
@@ -47,7 +49,6 @@ def solution_2( listIn ):
 		curr_max = max( listIn[i], curr_max + listIn[i] )
 		max_so_far = max( max_so_far, curr_max )
 
-	print "return:", max_so_far
 	return( max_so_far )
 
 
