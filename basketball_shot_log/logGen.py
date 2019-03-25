@@ -45,29 +45,33 @@ def shotDesc( shotType ):
 	distanceInfo = { "distanceStr": "%i-foot" % ( random.randint( *shotRange[shotType] ), ) }
 	return shotDescritptions[shotType][random.randrange( 0, len( shotDescritptions[shotType] ) )] % distanceInfo
 
+def makeLog( players, score ):
+	outList = []
+	for t in xrange( quarterTime, 0, -1 ):
+		activity = activityList[ random.randrange( 0, len( activityList ) ) ]
+		if activity != 0:  # something happened
+			team = random.randint( 0, 1 )
+			player = players[team][ random.randrange( 0, len( players[team] ) ) ]
+			shotInfo = []
+			if activity == 4:
+				shotsMade = random.randint( 0, 2 )
+				shotInfo = [ madeMissed( shotsMade ), "penality shots %i of 2" % ( shotsMade, ) ]
+				score[team] += shotsMade
+			elif activity == 3:
+				shotInfo = [ madeMissed( 3 ),
+						shotDesc( activity ),
+						"3-pointer" ]
+				score[team] += 3
+			elif activity == 2:  #
+				shotInfo = [ madeMissed( 2 ),
+						shotDesc( activity ) ]
+				score[team] += 2
+			elif activity == 1:  # shot missed
+				shotInfo = [ madeMissed( 0 ), shotDesc( random.randint( 2, 3 ) ) ]
 
-score = [0,0]
-for t in xrange( quarterTime, 0, -1 ):
-	activity = activityList[ random.randrange( 0, len( activityList ) ) ]
-	if activity != 0:  # something happened
-		team = random.randint( 0, 1 )
-		player = players[team][ random.randrange( 0, len( players[team] ) ) ]
-		shotInfo = []
-		if activity == 4:
-			shotsMade = random.randint( 0, 2 )
-			shotInfo = [ madeMissed( shotsMade ), "penality shots %i of 2" % ( shotsMade, ) ]
-			score[team] += shotsMade
-		elif activity == 3:
-			shotInfo = [ madeMissed( 3 ),
-					shotDesc( activity ),
-					"3-pointer" ]
-			score[team] += 3
-		elif activity == 2:  #
-			shotInfo = [ madeMissed( 2 ),
-					shotDesc( activity ) ]
-			score[team] += 2
-		elif activity == 1:  # shot missed
-			shotInfo = [ madeMissed( 0 ), shotDesc( random.randint( 2, 3 ) ) ]
+			outList.append( "%s\t\t%s %s %s" % ( sec2Time( t ), player,
+					" ".join( shotInfo ), "%i - %i" % ( score[0], score[1] ) ) )
 
-		print "%s\t\t%s %s %s" % ( sec2Time( t ), player,
-				" ".join( shotInfo ), "%i - %i" % ( score[0], score[1] ) )
+	return "\n".join( outList ), score
+
+print makeLog( players, [0,0] )[0]
