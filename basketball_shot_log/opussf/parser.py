@@ -10,8 +10,9 @@ import logGen
 import re
 
 log, final = logGen.makeLog()
+#################
 
-shotRE = re.compile( "^.*\t\t(\w* \w*) made .* (\d+) - (\d+)$" )
+shotRE = re.compile( "^.*\t\t(.*) made .* (\d+) - (\d+)$" )
 
 playerScores = {}
 for player in logGen.players[0]:
@@ -28,7 +29,6 @@ for line in log.split( "\n" ):
 		if home > score[0]:
 			playerScores[name] += home - score[0]
 			score[0] = home
-			print line
 
 
 print playerScores
