@@ -45,7 +45,7 @@ def shotDesc( shotType ):
 	distanceInfo = { "distanceStr": "%i-foot" % ( random.randint( *shotRange[shotType] ), ) }
 	return shotDescritptions[shotType][random.randrange( 0, len( shotDescritptions[shotType] ) )] % distanceInfo
 
-def makeLog( players, score ):
+def makeLog( players = players, score = [0,0] ):
 	outList = []
 	for t in xrange( quarterTime, 0, -1 ):
 		activity = activityList[ random.randrange( 0, len( activityList ) ) ]
@@ -74,4 +74,5 @@ def makeLog( players, score ):
 
 	return "\n".join( outList ), score
 
-print makeLog( players, [0,0] )[0]
+if __name__ == "__main__":
+	print makeLog( players, [0,0] )[0]
