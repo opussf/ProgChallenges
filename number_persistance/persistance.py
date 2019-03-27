@@ -24,7 +24,7 @@ def per_iterative( n ):
 		steps += 1
 		nums.append( n )
 		result = 1
-		for j in [ int( i ) for i in str( n ) ]:
+		for j in [int( i ) for i in str( n )]:
 			result *= j
 		n = result
 	return steps, nums
