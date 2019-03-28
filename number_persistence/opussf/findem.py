@@ -4,7 +4,7 @@ import sys, os
 
 sys.path.insert( 1, os.path.join( sys.path[0], '..' ) )
 
-from persistance import *
+from persistence import *
 per = per_iterative
 
 lowestMax = {}
@@ -14,11 +14,13 @@ for vln in xrange( sys.maxint ):
 	steps, nums = per( vln )
 	hasSteps = allNumsBySteps.get( steps, None )
 	if not hasSteps:
-		allNumsBySteps[steps] = []
-	allNumsBySteps[steps].append( vln )
+		allNumsBySteps[steps] = 0
+	allNumsBySteps[steps] += 1
 	if steps not in lowestMax.keys():
 		lowestMax[steps] = vln
 		print lowestMax
+	if vln % 500000 == 0:
+		print "Counts: ", allNumsBySteps
 
 allKeys = allNumsBySteps.keys()
 allKeys.sort()
