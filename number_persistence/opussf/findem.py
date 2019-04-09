@@ -27,7 +27,6 @@ class FindEm( object ):
 				current *= 10
 				current += int( c )
 		total += current
-		print total
 		self.options["runtime"] = total
 	def __loadData( self ):
 		""" load or init self.storedData """
