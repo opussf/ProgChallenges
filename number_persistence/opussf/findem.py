@@ -13,6 +13,7 @@ class FindEm( object ):
 		self.options = options
 		self.__decodeRuntime()
 		self.__loadData()
+		self.startVal = self.storedData["startVal"] + 1
 	def __decodeRuntime( self ):
 		""" decode options["runtime"] from a string (with units) to an integer number of seconds """
 		runtime = self.options["runtime"]
@@ -46,7 +47,12 @@ class FindEm( object ):
 		""" main method """
 		print "Starting at:", self.storedData["startVal"]
 		self.endTime = time.time() + int( self.options["runtime"] )
-		for vln in xrange( self.storedData["startVal"]+1, self.options["maxValue"]+1 ):
+		vln = self.startVal
+		rateTotal = {"startVal": self.startVal, "startTime": time.time()}
+		rateInterval = {"startVal": self.startVal, "startTime": time.time()}
+
+		while True:
+		#for vln in xrange( self.storedData["startVal"]+1, self.options["maxValue"]+1 ):
 			steps, nums = per( vln )
 			hasSteps = self.allNumsBySteps.get( steps, None )
 			if not hasSteps:
@@ -56,14 +62,16 @@ class FindEm( object ):
 				self.lowestMax[steps] = vln
 				print self.lowestMax
 			if vln % self.options["interval"] == 0:
-				print "%s (%0.2f): %s" % ( vln, vln / sys.maxint * 100, self.allNumsBySteps )
+				print "%s (%0.2f/%0.2f): %s" % ( vln,
+						(vln - rateInterval["startVal"]) / (time.time() - rateInterval["startTime"]),
+						(vln - rateTotal["startVal"]) / (time.time() - rateTotal["startTime"]),
+						self.allNumsBySteps )
+				rateInterval = {"startVal": vln, "startTime": time.time()}
 				self.__storeData( vln )
-			if time.time() >= self.endTime:
+			if( time.time() >= self.endTime ):
 				break
-		try: vln    # if the loop does not execute for some reason, this is not set
-		except: pass
-		else:
-			self.__storeData( vln )
+			vln += 1
+		self.__storeData( vln )
 		print "Ending:", self.lowestMax
 
 if __name__ == "__main__":
@@ -74,8 +82,6 @@ if __name__ == "__main__":
 			help="how long to run for. 1h, 60m, 3600s, 3600 are all the same." )
 	parser.add_option( "-i", "--interval", action="store", dest="interval", type="int", default=500000,
 			help="how often to report progress." )
-	parser.add_option( "-m", "--maxValue", action="store", dest="maxValue", type="int", default=sys.maxint-1,
-			help="max value to go to." )
 
 	(options, args) = parser.parse_args()
 
