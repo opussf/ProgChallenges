@@ -16,8 +16,6 @@ This could be done with a single function, or with a system of objects:
 
 How ever the solution is done, this should be able to be run many times, gathering the output to calculate statistics at the end.
 
-I figure that atleast 1000 times is good.  1 million times may be better.
-
 As you might imagine, an optimal solution might be best.
 
 Bonus for making it something that could be turned into a game, or turning it into a game.
