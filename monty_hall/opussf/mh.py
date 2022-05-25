@@ -87,7 +87,7 @@ class MontyHall( object ):
 
 
 if __name__ == "__main__":
-	games = 10000000
+	games = 100000000
 	for z in [0,1,2,3]:
 		mh = MontyHall( z & 1, z & 2 )
 		mh.run(games)
