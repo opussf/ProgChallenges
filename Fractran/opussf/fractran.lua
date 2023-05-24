@@ -1,13 +1,14 @@
 #!/usr/bin/env lua
 
-
-
 function factor( inVal, p )
 	outVals = {}
 	for f = 2, inVal / 2 do
 		while (inVal / f) % 1 == 0 do
 			outVals[f] = outVals[f] and outVals[f] + 1 or 1
 			inVal = inVal / f
+		end
+		if inVal <= 1 then
+			break
 		end
 	end
 	if p then
@@ -18,19 +19,21 @@ function factor( inVal, p )
 	return outVals
 end
 
-prog = { 455, 33, 11, 13, 1, 11, 3, 7, 11, 2, 1 ,3 }
+nums = {455, 11,  1, 3, 11, 1}
+dens = { 33, 13, 11, 7,  2, 3}
 
-input = 72
+input = (2^5)*(3^3)
+
 factor(input, true)
 
-maxInstructon = #(prog)/2
+maxInstructon = #(nums)
 
 n = input
 
 inst = 1
 
 while inst <= maxInstructon do
-	numerator, denominator = prog[inst*2-1], prog[inst*2]
+	numerator, denominator = nums[inst], dens[inst]
 	result = n * numerator / denominator
 	if result % 1 == 0 then
 		print( n.." * "..numerator.."/"..denominator.." = "..result )
