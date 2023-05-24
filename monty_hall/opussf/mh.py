@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import random
 
@@ -23,10 +23,11 @@ class MontyHall( object ):
 		self.outcome = None
 
 	def __chooseDoor( self ):
-		canChoose = map( lambda x: False if x & self.opened \
+		canChoose = list( map( lambda x: False if self.switch == False \
+										 or x & self.opened \
 										 or x & self.removed \
 										 or (self.switch and ( x & self.choosen )) \
-										 else True, self.doors )
+										 else True, self.doors ) )
 		#print(canChoose)
 		guessing = True
 		while guessing:
@@ -60,7 +61,7 @@ class MontyHall( object ):
 
 
 	def run( self, iterations ):
-		for i in xrange( iterations ):
+		for i in range( iterations ):
 			self.__setup()
 			self.__chooseDoor()
 			self.__reduceDoor()
@@ -77,7 +78,7 @@ class MontyHall( object ):
 			if game[-1]:
 				won += 1
 
-		out.append("In this game I %s." % (self.switch and "had to switch my choice" or "could switch my choice"))
+		out.append("In this game I %s." % (self.switch and "had to switch my choice" or "could not switch my choice"))
 		out.append("A door was removed %s." % (self.randomRemoval and "randomly" or "by Monty Hall"))
 		out.append("I won %d of %d games for %0.2f%% win rate." % (won, played, (won*1.0 / played*1.0) * 100))
 		return "\n".join(out)
