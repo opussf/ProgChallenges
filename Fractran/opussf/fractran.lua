@@ -47,4 +47,3 @@ end
 print(n)
 
 factor( n,true )
-
