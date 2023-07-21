@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 ### Line
-
+class Line( object ):
+    pass
 
 if __name__ == "__main__":
     import unittest
