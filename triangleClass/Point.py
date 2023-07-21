@@ -6,7 +6,7 @@ if __name__ == "__main__":
     import unittest
     class TestPoint( unittest.TestCase ):
         def setUp( self ):
-            self P = Point()
+            self.P = Point()
         def tearDown( self ):
             self.P = None
         def testPoint01( self ):
