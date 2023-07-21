@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 ### Line
+import Point
+
 class Line( object ):
-    pass
+    def __init__( self, 
 
 if __name__ == "__main__":
     import unittest

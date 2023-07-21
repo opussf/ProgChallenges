@@ -1,4 +1,8 @@
+#!/usr/bin/env python3
 ### Triangle Class from class
+import Line
+import Point
+
 class Triangle( object ):
     pass
 
